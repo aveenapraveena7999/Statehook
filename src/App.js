@@ -1,27 +1,93 @@
-import './App.css';
-import Typograpy from '@mui/material/Typography'
-import Button from '@mui/material/Button';
- import TextField from '@mui/material/TextField';
- import FaceIcon from '@mui/icons-material/Face';
- import Avatar from '@mui/material/Avatar';
-import  Form  from './component/Form';
+import { useState } from 'react';
 
-function App() {
-  const name="nane";
-  alert(name);
-  return(
-    <div className="App">
-      <h1>good morning</h1>
-      <Typograpy variant='h1'>welcome to tech world</Typograpy>
-      <TextField size='small' label="Name" autoFocus placeholder='Enter your name' multiline
+export default function Form() {
+  const [person, setPerson] = useState({
+    name: 'Praveena',
+    artwork: {
+      title: 'Developer',
+      city: 'Chitradurga',
+      image: 'https://picsum.photos/200/300',
+    }
+  });
+
+  function handleNameChange(e) {
+    setPerson({
+      ...person,
+      name: e.target.value
+    });
+  }
+
+  function handleTitleChange(e) {
+    setPerson({
+      ...person,
+      artwork: {
+        ...person.artwork,
+        title: e.target.value
+      }
+    });
+  }
+
+  function handleCityChange(e) {
+    setPerson({
+      ...person,
+      artwork: {
+        ...person.artwork,
+        city: e.target.value
+      }
+    });
+  }
+
+  function handleImageChange(e) {
+    setPerson({
+      ...person,
+      artwork: {
+        ...person.artwork,
+        image: e.target.value
+      }
+    });
+  }
+
+  return (
+    <>
+      <label>
+        Name:
+        <input
+          value={person.name}
+          onChange={handleNameChange}
+        />
+      </label>
+      <label>
+        Title:
+        <input
+          value={person.artwork.title}
+          onChange={handleTitleChange}
+        />
+      </label>
+      <label>
+        City:
+        <input
+          value={person.artwork.city}
+          onChange={handleCityChange}
+        />
+      </label>
+      <label>
+        Image:
+        <input
+          value={person.artwork.image}
+          onChange={handleImageChange}
+        />
+      </label>
+      <p>
+        <i>{person.artwork.title}</i>
+        {' by '}
+        {person.name}
+        <br />
+        (located in {person.artwork.city})
+      </p>
+      <img 
+        src={person.artwork.image} 
+        alt={person.artwork.title}
       />
-      <Button variant='contained'>hii bro</Button>
-      <Avatar style={{backgroundColor:"blue"}}>a</Avatar>
-      <FaceIcon/>
-      <Form/>
-
-       </div>
+    </>
   );
-
 }
-export default App;
